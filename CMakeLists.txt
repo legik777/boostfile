@@ -51,7 +51,10 @@ target_include_directories(tests
 )
 # TODO: change template word to project name and delete this comment
 target_link_libraries(tests GTest::gtest_main parser)
-target_link_libraries(scanner Boost::filesystem)
+
+target_link_libraries(Boost::filesystem)
+
+
 file(COPY misc DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
 enable_testing()

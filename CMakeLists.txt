@@ -18,6 +18,8 @@ HunterGate(
   SHA1 "35fa55bc1dfcf9f4d7264f8bb26cd1759ce1ae07"
 )
 
+
+#имя проекта
 project(parser)
 string(APPEND CMAKE_CXX_FLAGS " -pedantic -Werror -Wall -Wextra")
 string(APPEND CMAKE_CXX_FLAGS " -Wno-unused-command-line-argument")
@@ -26,8 +28,8 @@ string(APPEND CMAKE_CXX_FLAGS " -Wshadow -Wnon-virtual-dtor")
 hunter_add_package(GTest)
 find_package(GTest CONFIG REQUIRED)
 
-hunter_add_package(nlohmann_json)
-find_package(nlohmann_json 3.1.4 CONFIG REQUIRED)
+hunter_add_package(Boost COMPONENTS system filesystem)
+find_package(Boost 1.72.0 CONFIG REQUIRED system filesystem)
 
 add_library(parser STATIC
   # enum your files and delete this comment
@@ -47,10 +49,13 @@ target_include_directories(tests
 )
 # TODO: change template word to project name and delete this comment
 target_link_libraries(tests GTest::gtest_main parser)
-target_link_libraries(parser nlohmann_json::nlohmann_json)
+target_link_libraries(scanner Boost::filesystem)
+file(COPY misc DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
 enable_testing()
 add_test(NAME unit_tests COMMAND tests)
+
+
 
 if(BUILD_COVERAGE)
   function(ENABLE_PROJECT_COVERAGE PROJECT)

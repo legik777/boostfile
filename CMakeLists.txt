@@ -18,7 +18,7 @@ HunterGate(
   SHA1 "35fa55bc1dfcf9f4d7264f8bb26cd1759ce1ae07"
 )
 
-project(boostf)
+project(parser)
 string(APPEND CMAKE_CXX_FLAGS " -pedantic -Werror -Wall -Wextra")
 string(APPEND CMAKE_CXX_FLAGS " -Wno-unused-command-line-argument")
 string(APPEND CMAKE_CXX_FLAGS " -Wshadow -Wnon-virtual-dtor")
@@ -26,47 +26,28 @@ string(APPEND CMAKE_CXX_FLAGS " -Wshadow -Wnon-virtual-dtor")
 hunter_add_package(GTest)
 find_package(GTest CONFIG REQUIRED)
 
-hunter_add_package(Boost COMPONENTS system filesystem)
-find_package(Boost 1.72.0 CONFIG REQUIRED system filesystem)
+hunter_add_package(nlohmann_json)
+find_package(nlohmann_json 3.1.4 CONFIG REQUIRED)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-add_library(boostf STATIC
+add_library(parser STATIC
   # enum your files and delete this comment
-  ${CMAKE_CURRENT_SOURCE_DIR}/sources/source.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/sources/student.cpp
 )
-
 add_executable(tests
   # TODO: enum your files and delete this comment
-  ${CMAKE_CURRENT_SOURCE_DIR}/tests/test.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/tests/json_test.cpp
 )
 
-
-target_include_directories(boostf
+# TODO: change template word to project name and delete this comment
+target_include_directories(parser
   PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
-target_include_directories(test
+target_include_directories(tests
   PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
-
-target_link_libraries(tests GTest::gtest_main scanner)
-target_link_libraries(main scanner)
-target_link_libraries(scanner Boost::filesystem)
-
-file(COPY misc DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+# TODO: change template word to project name and delete this comment
+target_link_libraries(tests GTest::gtest_main parser)
+target_link_libraries(parser nlohmann_json::nlohmann_json)
 
 enable_testing()
 add_test(NAME unit_tests COMMAND tests)
@@ -75,13 +56,14 @@ if(BUILD_COVERAGE)
   function(ENABLE_PROJECT_COVERAGE PROJECT)
     target_compile_options(${PROJECT} PRIVATE --coverage)
     target_link_libraries(${PROJECT} --coverage)
-   add_coverage(${PROJECT})
+    add_coverage(${PROJECT})
   endfunction()
 
   set(ENABLE_COVERAGE ON CACHE BOOL "Enable coverage build." FORCE)
   list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
   find_package(codecov)
-  enable_project_coverage(main)
+  # TODO: change template word to project name and delete this comment
+  enable_project_coverage(parser)
   enable_project_coverage(tests)
   list(APPEND LCOV_REMOVE_PATTERNS "'${PROJECT_SOURCE_DIR}/tests/*'")
   coverage_evaluate()

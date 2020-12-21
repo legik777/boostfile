@@ -18,7 +18,7 @@ HunterGate(
   SHA1 "35fa55bc1dfcf9f4d7264f8bb26cd1759ce1ae07"
 )
 
-project(scanner)
+project(boostf)
 string(APPEND CMAKE_CXX_FLAGS " -pedantic -Werror -Wall -Wextra")
 string(APPEND CMAKE_CXX_FLAGS " -Wno-unused-command-line-argument")
 string(APPEND CMAKE_CXX_FLAGS " -Wshadow -Wnon-virtual-dtor")
@@ -29,23 +29,36 @@ find_package(GTest CONFIG REQUIRED)
 hunter_add_package(Boost COMPONENTS system filesystem)
 find_package(Boost 1.72.0 CONFIG REQUIRED system filesystem)
 
-add_library(scanner STATIC
-        sources/FTPScanner.cpp
-        )
-add_executable(main
-        sources/main.cpp
-        )
-add_executable(tests
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/test.cpp
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+add_library(boostf STATIC
+  # enum your files and delete this comment
+  ${CMAKE_CURRENT_SOURCE_DIR}/sources/source.cpp
 )
 
-target_include_directories(scanner
+add_executable(tests
+  # TODO: enum your files and delete this comment
+  ${CMAKE_CURRENT_SOURCE_DIR}/tests/test.cpp
+)
+
+
+target_include_directories(boostf
   PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
-target_include_directories(main
-  PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
-)
-target_include_directories(tests
+target_include_directories(test
   PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 

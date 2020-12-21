@@ -2,10 +2,6 @@
 
 #include <gtest/gtest.h>
 #include "../sources/boostf.cpp"
-#include <boost/filesystem/operations.hpp>
-#include <boost/algorithm/string/predicate.hpp>
-#include <boost/algorithm/string/split.hpp>
-#include <boost/algorithm/string.hpp>
 	std::vector<Broker> Broker::brokerVector;
 TEST(file, searchtest) {
 	std::string path_to_ftp = "../";

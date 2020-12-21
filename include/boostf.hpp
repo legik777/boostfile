@@ -34,7 +34,8 @@ public:
 private:
     static void checkBroker(std::vector<std::string> inputBroker) {
         bool exists = false;
-        for (int i = 0; i < brokerVector.size(); i++) {
+        int lvec = brokerVector.size();
+        for (int i = 0; i < lvec; i++) {
             Broker* br = &brokerVector[i];
             if (br->id == inputBroker[2]) {
                 exists = true;

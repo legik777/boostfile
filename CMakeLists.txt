@@ -33,7 +33,7 @@ find_package(GTest CONFIG REQUIRED)
 hunter_add_package(Boost COMPONENTS system filesystem)
 find_package(Boost 1.72.0 CONFIG REQUIRED system filesystem)
 
-add_library(parser STATIC
+add_library(boostf STATIC
   # enum your files and delete this comment
   ${CMAKE_CURRENT_SOURCE_DIR}/sources/boostf.cpp
 )
@@ -52,7 +52,7 @@ target_include_directories(tests
 # TODO: change template word to project name and delete this comment
 target_link_libraries(tests GTest::gtest_main parser)
 
-target_link_libraries(Boost::filesystem)
+target_link_libraries(boostf Boost::filesystem)
 
 
 file(COPY misc DESTINATION ${CMAKE_CURRENT_BINARY_DIR})

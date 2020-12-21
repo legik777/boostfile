@@ -35,7 +35,8 @@ TEST(file, searchtest2) {
 		std::cout << path_to_ftp << std::endl;
 		recdir(path_to_ftp);
 		std::vector<Broker> vec = Broker::ListBrokersv();
-		for (int i = 0; i < vect.size(); i++) {
+		int lvec = vect.size();
+		for (int i = 0; i < lvec; i++) {
 			if (vect[i] != vec[i].toString()) {
 				std::cout << vect[i] << std::endl << vec[i].toString() << std::endl << std::endl;
 				test = false;

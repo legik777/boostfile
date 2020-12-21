@@ -43,9 +43,10 @@ add_executable(tests
 )
 
 # TODO: change template word to project name and delete this comment
-target_include_directories(parser
+target_include_directories(boostf
   PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
+
 target_include_directories(tests
   PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
@@ -53,7 +54,7 @@ target_include_directories(tests
 target_link_libraries(tests GTest::gtest_main parser)
 
 target_link_libraries(boostf Boost::filesystem)
-
+target_link_libraries(testf Boost::filesystem)
 
 file(COPY misc DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
